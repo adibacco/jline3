@@ -26,6 +26,7 @@ import java.util.UUID;
 import java.util.function.Function;
 
 import org.jline.reader.Candidate;
+import org.jline.reader.Hint;
 import org.jline.reader.LineReader;
 import org.jline.reader.ParsedLine;
 import org.jline.terminal.Terminal;
@@ -117,12 +118,16 @@ public class Completers {
                     }
                     if (res instanceof Candidate) {
                         candidates.add((Candidate) res);
+                    } else if (res instanceof Hint) {
+                        candidates.add((Hint) res);
                     } else if (res instanceof String) {
                         candidates.add(new Candidate((String) res, (String) res, null, null, null, null, true));
                     } else if (res instanceof Collection) {
                         for (Object s : (Collection) res) {
                             if (s instanceof Candidate) {
                                 candidates.add((Candidate) s);
+                            } else if (s instanceof Hint) {
+                                candidates.add((Hint) s);
                             } else if (s instanceof String) {
                                 candidates.add(new Candidate((String) s, (String) s, null, null, null, null, true));
                             }
@@ -132,6 +137,8 @@ public class Completers {
                             Object s = Array.get(res, i);
                             if (s instanceof Candidate) {
                                 candidates.add((Candidate) s);
+                            } else if (s instanceof Hint) {
+                                candidates.add((Hint) s);
                             } else if (s instanceof String) {
                                 candidates.add(new Candidate((String) s, (String) s, null, null, null, null, true));
                             }
@@ -146,12 +153,16 @@ public class Completers {
                     }
                     if (res instanceof Candidate) {
                         candidates.add((Candidate) res);
+                    } else if (res instanceof Hint) {
+                        candidates.add((Hint) res);
                     } else if (res instanceof String) {
                         candidates.add(new Candidate((String) res, (String) res, null, completion.description, null, null, true));
                     } else if (res instanceof Collection) {
                         for (Object s : (Collection) res) {
                             if (s instanceof Candidate) {
                                 candidates.add((Candidate) s);
+                            } else if (s instanceof Hint) {
+                                candidates.add((Hint) s);
                             } else if (s instanceof String) {
                                 candidates.add(new Candidate((String) s, (String) s, null, completion.description, null, null, true));
                             }
@@ -385,6 +396,8 @@ public class Completers {
                     cands.add(new Candidate((String) obj));
                 } else if (obj instanceof Candidate) {
                     cands.add((Candidate) obj);
+                } else if (obj instanceof Hint) {
+                    cands.add((Hint) obj);
                 } else if (obj instanceof Node) {
                     nodes.add((Node) obj);
                 } else if (obj instanceof Completer) {
