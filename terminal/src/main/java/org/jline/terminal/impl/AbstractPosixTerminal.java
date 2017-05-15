@@ -58,7 +58,7 @@ public abstract class AbstractPosixTerminal extends AbstractTerminal {
         try {
             return pty.getSize();
         } catch (IOException e) {
-            throw new IOError(e);
+            return new Size(80, 24);
         }
     }
 
